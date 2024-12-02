@@ -1,0 +1,20 @@
+auditoria
+-----------------------------------------------------------------------------------------
+13-03-2024
+
+check de caja chica directores*
+omitir las facturas que manda rymsa a cilt
+actualizar asientos con las fechas*
+revizar 00300046010000019258
+ayuda visual numero factura, cedula juridica, monto final.
+manual de sistema
+caja chica
+
+5-4-2024
+poder asignar varias facturas a una misma cuenta de presupuesto
+
+revision estado de presupuesto
+revision de presupuestos para los directores utilizando la informacion de documentos asignados en exactus
+mantenimiento para tiquete electronico u otros que no tienen xml
+pensar en appsheet
+tener en cuenta revisar la fuente de las ordenes de compra

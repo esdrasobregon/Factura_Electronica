@@ -1,0 +1,147 @@
+tabla lineadetallefe
+function linea_factura_electronica_existe
+store procedure agregarLineadetallefe
+************************************************************
+
+**********************************************************************************
+
+*******************************************************************************************
+using entitys;
+using logic;
+using MySqlConnector;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Administracion_Factura_electronica.data
+{
+    public class CRUDLineaDetalle
+    {
+
+        public Boolean addLineaFacturaElectronica(LineaDetalle c)
+        {
+
+            Boolean res = false;
+
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(AppValues.sosConnectionString);
+                conn.Open();
+                string sentencia = "INSERT INTO sos.lineadetallefe " +
+                    "(NumeroLinea" +
+                    ",`Codigo`" +
+                    ",`TipoCC`" +
+                    ",`CodigoCC`" +
+                    ",`Cantidad`" +
+                    ",`UnidadMedida`" +
+                    ",`UnidadMedidaComercial`" +
+                    ",`Detalle`," +
+                    "`PrecioUnitario`" +
+                    ",`MontoTotal`" +
+                    ",`SubTotal`" +
+                    ",`ImpuestoNeto`" +
+                    ",`MontoTotalLinea`" +
+                    ",`Clave`" +
+                    ",`TipoDocumento`" +
+                    ",`MontoDescuento`" +
+                    ",`NaturalezaDescuento`" +
+                    ",`CodigoImp`" +
+                    ",`CodigoTarifa`" +
+                    ",`TarifaImp`" +
+                    ",`MontoImp`)" +
+                    "VALUES(" + c.NumeroLinea
+                    + ",'" + c.Codigo + "'"
+                   + ",'ND'" //+ ",'" + c.CodigoComercial.Tipo + "'"
+                    + ",'ND'" //+ ",'" + c.CodigoComercial.Codigo + "'"
+                    + ",'" + c.Cantidad + "'"
+                   + ",'" + c.UnidadMedida + "'"
+                    + ",'ND'"
+                    + ",'" + c.Detalle + "'"
+                     + ",'" + c.PrecioUnitario + "'"
+                     + ",'" + c.MontoTotal + "'"
+                     + ",'" + c.SubTotal + "'"
+                     + ",'" + c.ImpuestoNeto + "'"
+                     + ",'" + c.MontoTotalLinea + "'"
+                     + ",'" + c.Clave + "'"
+                     + ",'FACT'"
+                    + ",'" + c.MontoDescuento + "'"
+                    + ",'" + c.NaturalezaDescuento + "'"
+                    + ",'" + c.Impuesto.Codigo + "'" //+ ",'ND'" //
+                    +",'" + c.Impuesto.CodigoTarifa + "'" //+ ",'ND'"//+ 
+                   + ",'" + c.Impuesto.Tarifa + "'"// + ",'0'" //
+                   + ",'" + c.Impuesto.Monto + "');";// + ",'0');"; //
+
+                AppLogger.writeLog("CRUDLineaDetalle.addLineaFacturaElectronica sentencia " + "\n" + sentencia);
+                MySqlCommand cmd = new MySqlCommand(sentencia, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                res = true;
+            }
+            catch (Exception ex)
+            {
+                
+                //MessageBox.Show("Ha ocurrido un error " + ex.Message);
+                AppLogger.writeLog("CRUDLineaDetalle.addLineaFacturaElectronica error " + ex.Message);
+            }
+
+
+
+            return res;
+        }
+
+        public Boolean addLineaFacturaElectronicaSP(LineaDetalle c)
+        {
+
+            Boolean res = false;
+
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(AppValues.sosConnectionString);
+                conn.Open();
+                string sentencia = "call sos.agregarLineadetallefe(" 
+                    + c.NumeroLinea
+                    + ",'" + c.Codigo + "'"
+                   + ",'ND'" //+ ",'" + c.CodigoComercial.Tipo + "'"
+                    + ",'ND'" //+ ",'" + c.CodigoComercial.Codigo + "'"
+                    + ",'" + c.Cantidad + "'"
+                   + ",'" + c.UnidadMedida + "'"
+                    + ",'ND'"
+                    + ",'" + c.Detalle + "'"
+                     + ",'" + c.PrecioUnitario + "'"
+                     + ",'" + c.MontoTotal + "'"
+                     + ",'" + c.SubTotal + "'"
+                     + ",'" + c.ImpuestoNeto + "'"
+                     + ",'" + c.MontoTotalLinea + "'"
+                     + ",'" + c.Clave + "'"
+                     + ",'FACT'"
+                    + ",'" + c.MontoDescuento + "'"
+                    + ",'" + c.NaturalezaDescuento + "'"
+                    + ",'" + c.Impuesto.Codigo + "'" //+ ",'ND'" //
+                    + ",'" + c.Impuesto.CodigoTarifa + "'" //+ ",'ND'"//+ 
+                   + ",'" + c.Impuesto.Tarifa + "'"// + ",'0'" //
+                   + ",'" + c.Impuesto.Monto + "');";// + ",'0');"; //
+
+                AppLogger.writeLog("CRUDLineaDetalle.addLineaFacturaElectronicaSP sentencia " + "\n" + sentencia);
+                MySqlCommand cmd = new MySqlCommand(sentencia, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                res = true;
+            }
+            catch (Exception ex)
+            {
+
+                //MessageBox.Show("Ha ocurrido un error " + ex.Message);
+                AppLogger.writeLog("CRUDLineaDetalle.addLineaFacturaElectronicaSP error " + ex.Message);
+            }
+
+
+
+            return res;
+        }
+
+    }
+}
+*********************************************************************
+
